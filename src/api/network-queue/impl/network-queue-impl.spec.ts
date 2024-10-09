@@ -75,10 +75,17 @@ describe('NetworkQueueImpl', () => {
     it('should throw error if plugin method enqueue gives error response', (done) => {
       // arrange
       mockSharedPreference.getString = jest.fn((key) => of(key === ApiKeys.KEY_API_TOKEN ? '0123456789' : JSON.stringify({})));
+<<<<<<< HEAD
       mockDeviceInfo.getDeviceID = jest.fn((key) => '1234567890') as any;
       sbsync.enqueue = jest.fn((_, __, ___, success, error) => {
         error('');
       });
+=======
+      mockDeviceInfo.getDeviceID = jest.fn(() => '1234567890') as any;
+      sbsync.enqueue = jest.fn((_, __, ___, _success, error) => {
+        error();
+      }) as any;
+>>>>>>> origin/release-7.0.0
       const networkRequest = {
         body: new Uint8Array({} as any),
         headers: {},
@@ -143,7 +150,11 @@ describe('NetworkQueueImpl', () => {
         path: 'SAMPLE_HOST',
         type: 'raw'
       } as any;
+<<<<<<< HEAD
       mockDeviceInfo.getDeviceID = jest.fn((key) => '1234567890') as any;
+=======
+      mockDeviceInfo.getDeviceID = jest.fn(() => '1234567890') as any;
+>>>>>>> origin/release-7.0.0
       mockSharedPreference.getString = jest.fn((key) => of(key === ApiKeys.KEY_API_TOKEN ? '0123456789' : JSON.stringify({})));
       // act and assert
      networkQueue['interceptRequest'](networkRequest).subscribe((request: NetworkRequest) => {

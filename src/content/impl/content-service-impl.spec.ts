@@ -77,6 +77,7 @@ import {SharedPreferencesLocalStorage} from '../../util/shared-preferences/impl/
 import {ContentAggregator} from '../handlers/content-aggregator';
 import { QuestionSetFileReadHandler } from '../handlers/question-set-file-read-handler';
 import { GetChildQuestionSetHandler } from '../handlers/get-child-question-set-handler';
+import { UniqueId } from '../../db/util/unique-id';
 
 
 jest.mock('../handlers/search-content-handler');
@@ -1067,6 +1068,7 @@ describe('ContentServiceImpl', () => {
     describe('exportContent', () => {
         it('should export content for delete content', (done) => {
             // arrange
+            jest.spyOn(UniqueId, 'generateUniqueId').mockImplementation(() => 'SECRET')
             const request: ContentExportRequest = {
                 destinationFolder: 'SAMPLE_DESTINATION_FOLDER',
                 contentIds: ['SAMPLE_CONTENT_ID_1', 'SAMPLE_CONTENT_ID_2']
